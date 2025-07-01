@@ -17,6 +17,8 @@ pub async fn brl_to_btc(amount: Decimal) -> error::Result<Decimal> {
         Err(e) => log::error!("mercadobitcoin: {e:?}"),
     };
 
+    prices.sort();
+
     let Some(price) = prices.get(prices.len() / 2) else {
         return Err(error::Error::PricesNotAvailable);
     };
